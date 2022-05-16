@@ -37,7 +37,7 @@ public class CustomerController {
 	public ResponseEntity<String> addV11Customer(@RequestBody Customer customer){
 		gson=new Gson();
 		
-		if(this.customerService.addCustomer(customer)!=null)
+		if(this.customerService.addV1Customer(customer)!=null)
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(gson.toJson(customer));
 		else

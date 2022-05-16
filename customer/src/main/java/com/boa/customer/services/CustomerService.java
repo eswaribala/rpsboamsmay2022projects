@@ -1,5 +1,6 @@
 package com.boa.customer.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,12 @@ public class CustomerService {
     	return this.customerRepo.save(customer);
     }
     
+    public Customer addV1Customer(Customer customer) {
+    	if(customer.getDob().isBefore(LocalDate.now()))
+    	  return this.customerRepo.save(customer);
+    	else
+    		return null;
+    }
     
     //select all
     
