@@ -1,6 +1,7 @@
 package com.boa.customer.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -132,7 +133,27 @@ public class CustomerController {
 
 	    }
 
-		
+	    @GetMapping({"/v1.0/filters"})
+	    public ResponseEntity<?> getUserFilteredDataById(@RequestParam(name = "fields", required = false) String fields) {
+	    	List<Customer> customers=this.customerService.getAllCustomers();
+	    	
+	    	
+	    	if(customers.size()>0)
+	    	{
+	    		//fields refers to runtime selection
+	    		ObjectMapper mapper = Squiggly.init(new ObjectMapper(), fields);     		
+				return ResponseEntity.status(HttpStatus.ACCEPTED).
+						body(SquigglyUtils.listify(mapper, customers));
+				
+
+	    	}
+	    	else
+	    	{
+	    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	    				.body("customers Not Available");
+	    	}
+
+	    }
 		
 		
 		
