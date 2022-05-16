@@ -87,12 +87,11 @@ public class CustomerController {
 		public ResponseEntity<String> updateCustomerById(@PathVariable("customerId") 
 		long customerId, @PathVariable("firstName") 
 		String firstName,
+		
 		@PathVariable("lastName") 
-		String lastName,
-		@PathVariable("middleName") 
-		String middleName)
+		String lastName)
 		{
-			FullName fullName=new FullName(firstName,lastName,middleName);
+			FullName fullName=new FullName(firstName,"",lastName);
 			Customer customer=this.customerService.updateCustomerById(customerId,
 					fullName);
 			
