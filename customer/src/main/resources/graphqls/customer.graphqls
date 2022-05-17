@@ -10,14 +10,7 @@ type Customer {
 	gender:String
 }
 
-input CustomerInput{
 
-  customerId: ID!
-	name: FullNameInput
-	dob:String
-	gender:String
-
-}
 
 
 type FullName {
@@ -25,6 +18,15 @@ type FullName {
 firstName: String
 lastName: String
 middleName: String
+
+}
+
+input CustomerInput{
+
+  customerId: ID!
+	name: FullNameInput
+	dob:String
+	gender:String
 
 }
 
