@@ -9,6 +9,25 @@ type Address {
    
 }
 
+input AddressInput {
+
+	addressId: ID!
+	doorNo: String
+	streetName: String
+ 	city: String
+  state: String
+  country: String
+  customer: CustomerAddressInput
+}
+
+
+input CustomerAddressInput {
+
+    customerId: ID!
+  
+
+}
+
 
 
 extend type Query {
@@ -16,3 +35,7 @@ extend type Query {
 	findAddress(addressId: ID): Address
 }
 
+extend type Mutation {
+	createAddress(addressInput:AddressInput):Address
+        
+}

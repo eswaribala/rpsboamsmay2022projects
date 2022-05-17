@@ -1,5 +1,6 @@
 schema {
     query: Query  
+    mutation: Mutation
 }
 
 type Customer {
@@ -9,6 +10,16 @@ type Customer {
 	gender:String
 }
 
+input CustomerInput{
+
+  customerId: ID!
+	name: FullNameInput
+	dob:String
+	gender:String
+
+}
+
+
 type FullName {
 
 firstName: String
@@ -17,8 +28,22 @@ middleName: String
 
 }
 
+input FullNameInput {
+
+firstName: String
+lastName: String
+middleName: String
+
+}
+
+
 type Query {
 	findAllCustomers:[Customer]
 	findCustomer(customerId: ID):Customer
 }
 
+
+type Mutation {
+	createCustomer(customerInput:CustomerInput):Customer
+       
+}
