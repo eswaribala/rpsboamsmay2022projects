@@ -8,7 +8,7 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeTypeUtils;
 
-import com.boa.payment.facades.OrderConsumerFacade;
+import com.boa.payment.facades.PaymentFacade;
 import com.boa.payment.models.OrderModel;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OrderConsumerService {
 	
-	@StreamListener(target = OrderConsumerFacade.inChannel)
+	@StreamListener(target = PaymentFacade.inChannel)
 	public void consumeOrder(String message) {
 		
 	 log.info("Order Received"+message);
