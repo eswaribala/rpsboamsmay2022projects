@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 public class OrderModel {
 
 	private long orderId;
-	private LocalDate orderDate;
+	private String orderDate;
 	private long amount;
 }
