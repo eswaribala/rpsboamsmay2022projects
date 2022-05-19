@@ -23,7 +23,8 @@ public class OrderService {
 		
 		return messageChannel.send(MessageBuilder
                 .withPayload(orderModel)
-                .setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON)
+                .setHeader(MessageHeaders.CONTENT_TYPE, 
+                		MimeTypeUtils.APPLICATION_JSON)
                 .build());
 
 		
