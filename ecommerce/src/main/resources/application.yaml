@@ -4,10 +4,10 @@ spring.datasource:
   #username: sa
   #password: sa
 #spring.h2.console.enabled: true
-driverClassName: com.mysql.jdbc.Driver
-url: jdbc:mysql://localhost:3306/boamay2022camundadb?useSSL=true&nullCatalogMeansCurrent=true 
-username: root
-password: vignesh
+ driverClassName: com.mysql.jdbc.Driver
+ url: jdbc:mysql://localhost:3306/boamay2022camundadb?useSSL=true&nullCatalogMeansCurrent=true 
+ username: root
+ password: vignesh
 spring.jpa.hibernate.ddl-auto: update
 
 camunda.bpm:
@@ -19,4 +19,4 @@ camunda.bpm:
   filter:
     create: All Tasks
 #  default-serialization-format: application/json
-server.port: 6060
+server.port: 6064
