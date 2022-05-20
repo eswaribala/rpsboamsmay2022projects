@@ -20,12 +20,17 @@ public class OrderService {
 	public boolean publishOrder(OrderModel orderModel) {
 		
 		MessageChannel messageChannel=orderFacade.orderPublishChannel();
-		
+		if(orderModel.getAmount()>500) {
 		return messageChannel.send(MessageBuilder
                 .withPayload(orderModel)
                 .setHeader(MessageHeaders.CONTENT_TYPE, 
                 		MimeTypeUtils.APPLICATION_JSON)
                 .build());
+		}
+		else
+		{
+			return false;
+		}
 
 		
 	}

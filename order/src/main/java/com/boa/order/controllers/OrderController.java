@@ -25,7 +25,7 @@ public class OrderController {
     	}
     	else
     	{
-    		return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body("Message Not Published....."); 
+    		return ResponseEntity.status(HttpStatus.OK).body("Message Not Published....."); 
     	}
     }
 }
