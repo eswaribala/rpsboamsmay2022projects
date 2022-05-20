@@ -20,3 +20,4 @@ camunda.bpm:
     create: All Tasks
 #  default-serialization-format: application/json
 server.port: 6064
+orderUrl: http://localhost:7070/orders/v1.0
