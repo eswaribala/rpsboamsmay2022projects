@@ -1,0 +1,4 @@
+FROM java:8
+EXPOSE 6064
+ADD /target/ecommerce.jar ecommerce.jar
+ENTRYPOINT ["java","-jar","ecommerce.jar"]
