@@ -24,6 +24,9 @@ import com.github.bohnman.squiggly.Squiggly;
 import com.github.bohnman.squiggly.util.SquigglyUtils;
 import com.google.gson.Gson;
 
+import io.opentracing.Span;
+import io.opentracing.Tracer;
+
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -31,7 +34,9 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;	
 	private Gson gson;	
-	
+    @Autowired
+    private Tracer tracer;
+
 	//adding customer
 	@PostMapping({"/v1.0/"})
 	public ResponseEntity<String> addv10Customer(@RequestBody Customer customer){
@@ -60,7 +65,20 @@ public class CustomerController {
 	//getall
 	@GetMapping({"/v1.0"})
 	public List<Customer> getAllCustomers(){
-		return this.customerService.getAllCustomers();
+        HttpStatus status=null;  
+
+        Span span = tracer.buildSpan("accessing customers").start();
+        List<Customer> customers=this.customerService.getAllCustomers(span);
+        if (customers.size()>0) {
+            status = HttpStatus.CREATED;
+            span.setTag("http.status_code", 201);
+        } else {
+            span.setTag("http.status_code", 403);
+        }
+        span.finish();
+
+        
+		return customers;
 	}
 	
 	//get customer by id
@@ -135,16 +153,18 @@ public class CustomerController {
 
 	    @GetMapping({"/v1.0/filters"})
 	    public ResponseEntity<?> getUserFilteredDataById(@RequestParam(name = "fields", required = false) String fields) {
-	    	List<Customer> customers=this.customerService.getAllCustomers();
+	    	 Span span = tracer.buildSpan("accessing Filtered customers").start();
+	    	List<Customer> customers=this.customerService.getAllCustomers(span);
 	    	
 	    	
 	    	if(customers.size()>0)
 	    	{
+	    		  span.finish();
 	    		//fields refers to runtime selection
 	    		ObjectMapper mapper = Squiggly.init(new ObjectMapper(), fields);     		
 				return ResponseEntity.status(HttpStatus.ACCEPTED).
 						body(SquigglyUtils.listify(mapper, customers));
-				
+			
 
 	    	}
 	    	else
@@ -152,7 +172,7 @@ public class CustomerController {
 	    		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 	    				.body("customers Not Available");
 	    	}
-
+      
 	    }
 		
 		

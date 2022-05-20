@@ -133,6 +133,18 @@
 		    <groupId>io.micrometer</groupId>
 		    <artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/io.jaegertracing/jaeger-core -->
+		<dependency>
+		    <groupId>io.jaegertracing</groupId>
+		    <artifactId>jaeger-core</artifactId>
+		   <version>1.8.0</version>
+		</dependency>
+				<!-- https://mvnrepository.com/artifact/io.jaegertracing/jaeger-client -->
+		<dependency>
+		    <groupId>io.jaegertracing</groupId>
+		    <artifactId>jaeger-client</artifactId>
+		    <version>1.8.0</version>
+		</dependency>
 		
 			
 		

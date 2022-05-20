@@ -10,10 +10,16 @@ import com.boa.customer.models.Customer;
 import com.boa.customer.models.FullName;
 import com.boa.customer.repositories.CustomerRepo;
 
+import io.opentracing.Span;
+import io.opentracing.Tracer;
+
 @Service
 public class CustomerService {
     @Autowired
 	private CustomerRepo customerRepo;
+    @Autowired
+    private Tracer tracer;
+
     
     //insert
     public Customer addCustomer(Customer customer) {
@@ -29,8 +35,14 @@ public class CustomerService {
     
     //select all
     
-    public List<Customer> getAllCustomers(){
-    	return this.customerRepo.findAll();
+    public List<Customer> getAllCustomers(Span rootSpan){
+
+
+        Span span = tracer.buildSpan("service fetching customer details")
+        		.asChildOf(rootSpan).start();
+       List<Customer> customers= this.customerRepo.findAll();
+       span.finish();
+    	return customers;
     }
     
     //select by id
